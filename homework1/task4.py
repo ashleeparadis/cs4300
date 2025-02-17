@@ -7,3 +7,4 @@ def calculate_discount(price, discount):
     dis_price = price * (1 - (discount / 100))
     return dis_price
 
+print(calculate_discount(20, 10))

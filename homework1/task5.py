@@ -9,3 +9,5 @@ print(fav_books[1:3])
 #Dictionary of a basic student data based containing names and ids
 
 students = {"Bob Smith": 432543, "Stacy Long": 875398, "Peter Parker": 394784, "Bob Dylan": 586839, "John Stand": 847696}
+
+print(students)
