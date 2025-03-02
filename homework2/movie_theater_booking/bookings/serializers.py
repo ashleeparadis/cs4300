@@ -6,12 +6,12 @@ class MovieSerializer(serializers.ModelSerializer):
         model = Movie
         fields = '__all__'
 
-class SeatSerializer(serializer.ModelSerializer):
+class SeatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Seat
         fields = '__all__'
 
-class BookingSerializer(serializer.ModelSerializer):
+class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         fields = '__all__'
