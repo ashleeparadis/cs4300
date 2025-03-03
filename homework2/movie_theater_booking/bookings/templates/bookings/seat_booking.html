@@ -5,20 +5,51 @@
 {% block content %}
 <h2>Book a Seat for {{ movie.title }}</h2>
 
-<div class="row">
-    {% for seat in available_seats %}
-    <div class="col-4">
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Seat {{ seat.seat_num }}</h5>
+<!-- Debugging output -->
+<p>Total Seats Found: {{ seats|length }}</p>  <!-- Display total seats in template -->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Seat Number</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for seat in seats %}
+        <tr>
+            <td>{{ seat.seat_num }}</td>
+            <td>
                 {% if seat.is_booked %}
-                    <p class="card-text text-danger">Booked</p>
+                    <span class="text-danger">Booked</span>
                 {% else %}
-                    <a href="{% url 'confirm_booking' seat.id %}" class="btn btn-success">Book Now</a>
+                    <span class="text-success">Available</span>
                 {% endif %}
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if seats|length == 0 %}
+    <p class="text-danger">No seats available.</p>
+{% endif %}
+
+<!-- Seat Booking Form -->
+<form method="POST" action="{% url 'confirm_booking' movie.id %}">
+    {% csrf_token %}
+    <label for="seat_num">Enter Seat Number:</label>
+    <input type="text" name="seat_num" id="seat_num" required class="form-control mb-3" placeholder="e.g., A1">
+    <button type="submit" class="btn btn-primary">Book a Seat</button>
+</form>
+
 {% endblock %}
+
+
+
+
+
+
+
+
+

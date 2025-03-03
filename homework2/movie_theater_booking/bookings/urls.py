@@ -1,9 +1,10 @@
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
+from django.contrib.auth import views as auth_views
 from .views import (
     MovieViewSet, SeatViewSet, BookingViewSet, 
-    movie_list, book_seat, booking_history, book_seat
+    movie_list, book_seat, booking_history, confirm_booking, register, user_login,
 )
 
 router = DefaultRouter()
@@ -16,10 +17,13 @@ urlpatterns = [
     path('api/', include(router.urls)), 
 
     #Frontend URLs for rendering templates
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
     path('movies/', movie_list, name='movie_list'),
-    path('seat-booking/', book_seat, name='book_seat'),
     path('booking-history/', booking_history, name='booking_history'),
-    path('book_seat/<int:movie_id>', book_seat, name='book_seat'),
+    path('book_seat/<int:movie_id>/', book_seat, name='book_seat'),
+    path('confirm_booking/<int:movie_id>/', confirm_booking, name='confirm_booking'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
     path('', movie_list, name='home'),
 ]

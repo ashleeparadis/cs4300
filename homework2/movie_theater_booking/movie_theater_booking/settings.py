@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-6qv7qvie$!e$3)l!cx1=n+5@^qz!@f0=*6b)%124b$f6ibp*w0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'editor-ashleeparadis-5.devedu.io', 'app-ashleeparadis-5.devedu.io']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'editor-ashleeparadis-5.devedu.io', 'app-ashleeparadis-5.devedu.io', 'testserver', 'https://app-ashleeparadis-5.devedu.io']
 
 
 # Application definition
@@ -129,7 +129,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+LOGIN_URL = '/login/'
+
+LOGOUT_REDIRECT_URL = '/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://app-ashleeparadis-5.devedu.io',
+]
