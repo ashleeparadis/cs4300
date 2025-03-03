@@ -20,21 +20,24 @@ class SeatViewSet(viewsets.ModelViewSet):
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
-
+   
+#Function to render page listing all movies
 def movie_list(request):
     movies = Movie.objects.all()
     return render(request, 'bookings/movie_list.html', {'movies': movies})
 
+#Method to redirect to the seat_booking page with all seats
 def book_seat(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
 
-    seats = Seat.objects.all()
+    seats = Seat.objects.all()   #Get all seat objects
 
     return render(request, 'bookings/seat_booking.html', {
         'movie': movie,
         'seats': seats
     })
 
+#Function to handle user booking, user must be logged in to book
 @login_required
 def confirm_booking(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
@@ -65,6 +68,7 @@ def confirm_booking(request, movie_id):
 
     return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': Seat.objects.all()})
 
+#Function to render booking_history page, user must be logged in 
 @login_required
 def booking_history(request):
 
@@ -83,7 +87,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'bookings/register.html', {'form': form})
 
-# User Login View
+#Function to render long in page
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)

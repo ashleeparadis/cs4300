@@ -20,6 +20,7 @@ class Seat(models.Model):
     def __str__(self):
         return f"Seat {self.seat_num}: {'Booked' if self.is_booked else 'Available'}"
 
+#Booking class to define the movie booked along with the seat, the user, and the booking date.
 class Booking(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     seat = models.OneToOneField(Seat, on_delete=models.CASCADE)
